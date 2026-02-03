@@ -12,6 +12,7 @@ Running this script will drop entire 'DataWarehouse' databased if it exists.
 All data in databased will be permanently deleted. Proceed with caution and ensure you have proper backups before running this script.
 
 =========================================================================================================================================
+
 -- Drop and recreate the 'DataWarehouse' Database
 if EXISTS (select 1 from sys.databases where name = 'DataWarehouse')
 BEGIN
@@ -27,6 +28,8 @@ GO
 use DataWarehouse
 
 -- Create Schemas
+--Schema is like a folder that help us keep things organized.
+
 CREATE SCHEMA bronze;
 GO
 CREATE SCHEMA silver;
