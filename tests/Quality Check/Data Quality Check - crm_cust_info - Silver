@@ -1,0 +1,42 @@
+--QUALITY CHECK
+
+-- Detect quality issues by exploring the data
+-- Check for nulls or duplicates in primary key
+-- Expectation : No result
+SELECT
+cst_id, 
+COUNT(*) AS 'Total Duplicate'
+FROM bronze.crm_cust_info
+GROUP BY cst_id
+HAVING COUNT(*) > 1 OR cst_id IS NULL
+
+
+-- Check unwanted spaces in string values
+-- Expectation : No results
+SELECT cst_firstname
+FROM bronze.crm_cust_info
+WHERE cst_firstname != TRIM(cst_firstname)
+
+SELECT cst_lastname
+FROM bronze.crm_cust_info
+WHERE cst_lastname != TRIM(cst_lastname)
+
+SELECT cst_marital_status
+FROM bronze.crm_cust_info
+WHERE cst_marital_status != TRIM(cst_marital_status)
+
+SELECT cst_gndr
+FROM bronze.crm_cust_info
+WHERE cst_gndr != TRIM(cst_gndr)
+
+SELECT cst_key
+FROM bronze.crm_cust_info
+WHERE cst_key != TRIM(cst_key)
+
+-- Check Data Standardization & Consistency for Low Cardinality Columns
+-- Expectation result :  
+SELECT DISTINCT cst_gndr
+FROM bronze.crm_cust_info
+
+SELECT DISTINCT cst_marital_status
+FROM bronze.crm_cust_info
